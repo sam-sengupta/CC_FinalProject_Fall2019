@@ -1,3 +1,5 @@
+// working on set-ups and scene management, will be up on github soon
+
 let myFont;
 function preload() {
   myFont = loadFont('Skia.ttf');

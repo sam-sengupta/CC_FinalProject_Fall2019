@@ -24,9 +24,9 @@ function setup()
     mgr.addScene (intro);
     mgr.addScene (scene1);
     mgr.addScene (scene2);
-	  mgr.addScene (scene3);
-	  mgr.addScene (scene4);
-	  // mgr.addScene (scene5);
+	mgr.addScene (scene3);
+	mgr.addScene (scene4);
+	mgr.addScene (scene5);
 	
 
     mgr.showNextScene(); // navigation bw scenes
@@ -276,19 +276,19 @@ function scene4(){
 
 // // final scene, yelling becomes louder and random on black screen, summary of story at end along with random scary popping pictures of people with dark circles
 
-// function scene5(){
+function scene5(){
 	
-// 	this.setup = function() {
-// 		fill(0);
-// 		createCanvas(windowWidth, windowHeight);
+	this.setup = function() {
+		fill(0);
+		createCanvas(windowWidth, windowHeight);
 
-// 	}
+	}
 
-//     this.draw = function() {
+    this.draw = function() {
 
-//     }
+    }
 
-//     this.mousePressed = function() {
-// 			remove();
-//     }
-// }
+    this.mousePressed = function() {
+			background(0);
+    }
+}

@@ -289,6 +289,6 @@ function scene4(){
 //     }
 
 //     this.mousePressed = function() {
-// 			this.sceneManager.showScene(intro);
+// 			remove();
 //     }
 // }

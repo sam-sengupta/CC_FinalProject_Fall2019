@@ -1,4 +1,4 @@
-// Used scene manager library to navigate between scenes, play library for animations - taken from p5 libraries
+// Used scene manager library to navigate between scenes, sound library for sound effects - taken from p5 libraries
 // Will have up to 6 scenes
 
 var music; // variable for bg music
@@ -10,6 +10,9 @@ function preload() {
 	smalltent = loadImage('smalltent.png'); // small tent
 	ferriswheel1 = loadImage('ferriswheel1.png'); // ferris wheel
 	tent = loadImage('tent.png'); // big bg tent
+	spotlight = loadImage('spotlight.jpg') // spotlight in last scene
+	child = loadImage('child.png') // child silhouette
+	help = loadSound("help.ogg"); // final scene sound effect
 }
 
 function setup()
@@ -24,9 +27,10 @@ function setup()
     mgr.addScene (intro);
     mgr.addScene (scene1);
     mgr.addScene (scene2);
-	mgr.addScene (scene3);
-	mgr.addScene (scene4);
-	mgr.addScene (scene5);
+	  mgr.addScene (scene3);
+	  mgr.addScene (scene4);
+	  mgr.addScene (scene5);
+	  mgr.addScene (scene6);
 	
 
     mgr.showNextScene(); // navigation bw scenes
@@ -41,6 +45,10 @@ function mousePressed()
 {
     mgr.handleEvent("mousePressed"); // to manage mousePressed functions, taken from p5 scene manager syntax
 }
+
+
+
+
 
 
 // scene for intro page
@@ -68,9 +76,15 @@ function intro(){
 }
 
 
+
+
+
+
+
 // Carnival scene
 
 // function for background images to be used in draw loop for this scene
+
 function balloonscene() {
 	// for green grass background rectangle
 	fill('#08A344');
@@ -150,6 +164,10 @@ class balloonclass2 {
 }
 
 
+
+
+
+
 // scene for balloon game (pop 5 to proceed to next scene)
 
 
@@ -185,7 +203,7 @@ function scene2(){
          redballoons[i].bounce(); // limited movement for balloons
 
          // removes the current element on click by calculating distance between mouse pointer and edge of the balloons that pops uo
-         if (mouseIsPressed && dist(mouseX, mouseY, redballoons[i].x, redballoons[i].y) < 70) {
+         if (mouseIsPressed && dist(mouseX, mouseY, redballoons[i].x, redballoons[i].y) < 100) {
 					 redballoons.splice(i, 1);
            score++;
 				}		
@@ -226,7 +244,10 @@ class balloonclass {
 }
 
 
-// scene for title screen 'YOU ARE HAPPY :)', insert music
+
+
+
+// scene for title screen 'YOU ARE HAPPY :)'
 
 function scene3(){
 	
@@ -248,6 +269,9 @@ function scene3(){
 			this.sceneManager.showNextScene();
     }
 }
+
+
+
 
 
 // // ending scene, 'BUT AT WHAT COST??' title screen
@@ -274,21 +298,63 @@ function scene4(){
 }
 
 
-// // final scene, yelling becomes louder and random on black screen, summary of story at end along with random scary popping pictures of people with dark circles
+
+
+// Text screen, text gliding across screen
 
 function scene5(){
 	
-	this.setup = function() {
-		fill(0);
-		createCanvas(windowWidth, windowHeight);
+	let x, y; // variables for text box movement
+	
+	// variable for text
+	let s = "Every year, there is a carnival held in Omelas, the perfect utopian society. People live there in perfect harmony and peace, but at the cost of a life. There is a child, that sits alone in a dark room, barely fed, just kept alive. All the citizens of Omelas knows of its existence, but they all chose to ignore it. However, there are some young residents who look into that cold, dark room carrying the cost of their happiness, and chose to walk away from Omelas.                                                                                     The ones who walks away from Omelas.";
 
+	
+	this.setup = function() {
+		createCanvas(windowWidth, windowHeight);
+		x = windowWidth/2;
+    y = windowHeight + 700;
 	}
 
-    this.draw = function() {
+  this.draw = function() {
+		background (0);
+		// paramters for text display
+	  fill(255);
+	  textSize(30);
+	  textAlign(CENTER);
+	  textFont("Times New Roman");
+	  rectMode(CENTER); // to align text box
+	  text(s, x, y, x*2 - 800, y); // paramters for location and warp of text box
+		
+	  y = y - 0.7; // to move the text box up
 
-    }
+  }
+	
+	this.mousePressed = function() {
+			this.sceneManager.showNextScene();
+  }
+}
 
-    this.mousePressed = function() {
+
+
+
+
+// Ending scene with finding the child
+
+function scene6(){
+	
+	this.setup = function() {
+		createCanvas(windowWidth, windowHeight);
+		image(spotlight, 0, 0, 1000, 800); // parameters for spotlight image
+		help.setVolume(0.1); // reducing volume of loud file
+    help.play(); // play sound
+	}
+
+  this.draw = function() {
+		image(child, 620, 500, 100, 170); // child image paramters
+  }
+	
+	this.mousePressed = function() {
 			background(0);
-    }
+  }
 }
